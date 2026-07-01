@@ -1,22 +1,15 @@
-from flask import Flask
+from flask import Flask, render_template, request
 
 app = Flask(__name__)
 
 @app.route("/")
 def home():
-    return """
-    <h1>Привет! Я Катто</h1>
-    <p>Учу Python с нуля каждый день</p>
-    <p>Это мой первый сайт на Flask!</p>
-"""
+    return render_template("index.html")
 
-@app.route("/about")
-def about():
-    return """
-    <h1>Обо мне</h1>
-    <p>Мне 22 года</p>
-    <p>Цель - стать программистом</p>
-"""
+@app.route("/result", methods=["POST"])
+def result():
+    imya = request.form["imya"]
+    return f"<h1>Привет, {imya}!</h1>"
 
 if __name__ == "__main__":
     app.run(debug=True)
